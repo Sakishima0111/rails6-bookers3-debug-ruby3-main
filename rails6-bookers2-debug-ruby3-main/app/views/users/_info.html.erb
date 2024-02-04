@@ -20,17 +20,18 @@
   </tr>
 </table>
 
-<% if user.email != "guest@example.com" %>
-<div class="row">
-  <%= link_to "",edit_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
-</div>
-<% end %>
+
+
 <div class="row">
   <% if current_user != user %>
     <td><%= render "relationships/btn", user: user, options: { class: ""} %></td>
+  <% elsif %>
+    <% if user.email != "guest@example.com" %>
+    <% end %>
   <% else %>
     <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
       <i class="fas fa-user-cog"></i>
     <% end %>
   <% end %>
+
 </div>

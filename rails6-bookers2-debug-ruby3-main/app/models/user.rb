@@ -11,7 +11,8 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followings, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
   has_one_attached :profile_image
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
@@ -24,7 +25,7 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   GUEST_USER_EMAIL = "guest@example.com"
 
   def self.guest
@@ -32,6 +33,10 @@ class User < ApplicationRecord
       user.password = SecureRandom.urlsafe_base64
       user.name = "guestuser"
     end
+  end
+
+  def follow(user)
+    active_relationships.create(followed_id: user.id)
   end
 
   def unfollow(user)
@@ -42,6 +47,10 @@ class User < ApplicationRecord
     followings.include?(user)
   end
   
+  def followed_by?(other_user)
+    self.followers.exists?(other_user.id)
+  end
+
   def self.search_for(content, method)
     if method == 'perfect'
       User.where(name: content)

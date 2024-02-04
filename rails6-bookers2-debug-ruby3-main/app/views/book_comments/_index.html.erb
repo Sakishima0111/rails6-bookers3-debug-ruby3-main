@@ -10,7 +10,7 @@
             </td>
             <td><%= book_comment.comment %></td>
             <td>
-              <%= link_to "Destroy", book_book_comment_path(book, book_comment), class: "btn btn-sm btn-danger", method: :delete, rocal: false %>
+              <%= link_to "Destroy", book_book_comment_path(book, book_comment), class: "btn btn-sm btn-danger", method: :delete, remote: true %>
   
             </td>
           </tr>
