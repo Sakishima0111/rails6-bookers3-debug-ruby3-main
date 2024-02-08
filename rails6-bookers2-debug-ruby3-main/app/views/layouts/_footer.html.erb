@@ -3,6 +3,9 @@
   	<div class='row'>
     	<div class='mx-auto'>
     		<p>CopyRight Infratop.inc</p>
+    		  <% if current_user.try(:admin?) %>
+            <%= link_to '管理者ログイン', rails_admin_path %>
+          <% end %>
     	</div>
     </div>
   </div>

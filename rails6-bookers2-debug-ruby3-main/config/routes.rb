@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users
   devise_scope :user do
@@ -18,11 +19,10 @@ Rails.application.routes.draw do
     	get "followings" => "relationships#followings", as: "followings"
     	get "followers" => "relationships#followers", as: "followers"
   end
-  resources :messages, only: [:create]
-  resources :rooms, only: [:create, :show]
+
   resources :notifications
   resources :groups, only: [:new, :index, :show, :create, :edit, :update]
-
+  resources :chats, only: [:show, :create]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 end
