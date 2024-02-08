@@ -6,6 +6,7 @@ class GroupsController < ApplicationController
       @book = Book.new
       @groups = Group.all
       @user = User.find(current_user.id)
+      
     end
   
     def show
