@@ -110,3 +110,16 @@ header{
 .serch{
   padding-top: 70px;
 }
+/*aboutのスライドショーのCSS*/
+.slideshowz{
+  overflow: hidden;
+  position: relative;
+  min-width: 960px;
+  height: 465px;
+}
+.slideshow img{
+  display: none;
+  position: absolute;
+  left: 50%;
+  margin-left: -800px
+}
